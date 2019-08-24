@@ -1,6 +1,6 @@
 podTemplate(
     containers: [containerTemplate(name: 'golang', image: 'golang', ttyEnabled: true, command: 'cat')],
-    volumes: [hostPathVolume(hostPath: '/root/godata', mountPath: '/root/godata/')]
+    volumes: [hostPathVolume(hostPath: '/root/godata', mountPath: '/root/godata/')],
     namespace: 'kube-jenkins',
     nodeSelector: "ip-172-26-14-103.ap-northeast-2.compute.internal"
           
