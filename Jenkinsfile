@@ -18,7 +18,7 @@ node(POD_LABEL) {
                     sh "go get -u github.com/gorilla/mux"
                     sh "go build"
                 sh "pwd"
-                sh "cp -r / /root/godata"
+                sh "cp -r /home/jenkins/agent/workspace/  /root/godata"
             }
         
         }
