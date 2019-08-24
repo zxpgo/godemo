@@ -16,7 +16,7 @@ node(POD_LABEL) {
 
             stage('Build') {
                     sh "go get -u github.com/gorilla/mux"
-                    sh "go build"
+                    sh "go build -o hello-server"
                 sh "pwd"
                 sh "cp -r /home/jenkins/agent/workspace/  /root/godata"
             }
