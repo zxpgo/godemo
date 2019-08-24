@@ -1,28 +1,25 @@
 podTemplate(label: 'mypod',
-    containers: [
-        containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
-        containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm', ttyEnabled: true, command: 'cat'),
-        containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', ttyEnabled: true, command: 'cat'),
-    ],
-    volumes: [
-        hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
-    ]
+    containers: [containerTemplate(name: 'golang', image: 'golangr', ttyEnabled: true, command: 'cat')],
+    //volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
+    namespace: 'kube-jenkins',
+    nodeSelector: "ip-172-26-14-103.ap-northeast-2.compute.internal"
+          
 )
 {
-    node('mypod') {
-        stage('Publish Docker Image') {
-            container('docker') {
-                checkout scm
+node(POD_LABEL) {
+        container('golang') {
+             stage('Clone') {
+                container('docker') {
+                    checkout scm
+                }
             }
-        }
 
-        stage('Deploy to Prod') {
-            container('helm') {
-
+            stage('Build') {
+                container('helm') {
+                    sh "go build"
+                }
             }
-            container('kubectl') {
-
-            }
+        
         }
     }
 }
