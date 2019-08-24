@@ -15,7 +15,7 @@ node(POD_LABEL) {
             }
 
             stage('Build') {
-
+                    sh "go get -u github.com/gorilla/mux"
                     sh "go build"
 
             }
