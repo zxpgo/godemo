@@ -9,15 +9,15 @@ podTemplate(
 node(POD_LABEL) {
         container('golang') {
              stage('Clone') {
-                container('docker') {
+
                     checkout scm
-                }
+
             }
 
             stage('Build') {
-                container('helm') {
+
                     sh "go build"
-                }
+
             }
         
         }
